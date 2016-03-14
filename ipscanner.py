@@ -1,6 +1,6 @@
 import subprocess
 import shlex
-
+import pymysql
 
 
 def main():
@@ -11,6 +11,13 @@ def main():
              try:
                  subprocess.check_call(args,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
                  print ("ip canlı:"+"192.168.31."+str(ip))
+                 conn = pymysql.connect(
+                 db='python',
+                 user='root',
+                 passwd='1qazXSW2',
+                 host='localhost')
+                 c = conn.cursor()
+                 c.execute("SELECT * FROM python.ip")
              except subprocess.CalledProcessError:
                  print ("ip pinge ecevap vermiyor:"+"192.168.31."+str(ip))
 
