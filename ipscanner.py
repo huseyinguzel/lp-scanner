@@ -18,7 +18,7 @@ def sqli(ipadres):
         conn.close()
 
 def main():
-        for ip in range(1,255):
+        for ip in range(1,10):
              command_line = "ping -c 3 192.168.43."+str(ip)
              args = shlex.split(command_line)
              ipadres="192.168.43."+str(ip)
@@ -49,6 +49,8 @@ def main():
                  conn.close()
              except subprocess.CalledProcessError:
                  print ("ip pinge cevap vermiyor:"+"192.168.43."+str(ip))
+        time.sleep(60)
+        return  main()
 
 
 main()
