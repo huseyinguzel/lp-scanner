@@ -4,6 +4,7 @@ import os
 import sys
 import time
 import pymysql
+from tkinter import *
 
 
 def sqli(ipadres):
@@ -16,6 +17,26 @@ def sqli(ipadres):
         c.execute("insert into python.ip(ipcol) values(%s)",ipadres)
         conn.commit()
         conn.close()
+
+
+
+def msj():
+    root=Tk()
+    root.geometry('450x450+500+300')
+    root.title('ipscanner')
+    thelabel=Label(root,text="Yeni ip adresi bulunmuştur")
+    mbutton=Button(root,text='ok',fg='red',bg='blue').pack()
+    mylebel=Label(root,text='my label').pack()
+    thelabel.pack()
+    root.mainloop()
+
+
+
+
+
+
+
+
 
 def main():
         for ip in range(1,10):
@@ -38,6 +59,7 @@ def main():
                  sorgu=c.execute("SELECT ipcol  FROM python.ip where ipcol=""%s",ipadres)
                  print(sorgu)
                  if sorgu==0:
+                     msj()
                      print("veritabanında yok")
                      cevap=input("eklemek için evet yazın devam etmek için entera basın:")
                      if cevap=="evet":
