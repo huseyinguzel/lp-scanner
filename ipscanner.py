@@ -18,25 +18,13 @@ def sqli(ipadres):
         conn.commit()
         conn.close()
 
-
-
-def msj():
+def msj(ipadres):
     root=Tk()
-    root.geometry('450x450+500+300')
+    root.geometry('300x300+500+300')
     root.title('ipscanner')
-    thelabel=Label(root,text="Yeni ip adresi bulunmuştur")
-    mbutton=Button(root,text='ok',fg='red',bg='blue').pack()
-    mylebel=Label(root,text='my label').pack()
+    thelabel=Label(root,text="Yeni ip adresi bulunmuştur:"+ipadres)
     thelabel.pack()
     root.mainloop()
-
-
-
-
-
-
-
-
 
 def main():
         for ip in range(1,10):
@@ -57,22 +45,21 @@ def main():
                  host='localhost')
                  c = conn.cursor()
                  sorgu=c.execute("SELECT ipcol  FROM python.ip where ipcol=""%s",ipadres)
-                 print(sorgu)
                  if sorgu==0:
-                     msj()
                      print("veritabanında yok")
+                     msj(ipadres)
                      cevap=input("eklemek için evet yazın devam etmek için entera basın:")
                      if cevap=="evet":
                          sqli(ipadres)
+                         print("Bu ipadresi veritabanına eklenmiştir:"+ipadres)
                      else:
                          print("eklenmedi")
                  else:
-                     print("var")
+                     print(" veritabanında bu ip adresi vardır")
                  conn.close()
              except subprocess.CalledProcessError:
                  print ("ip pinge cevap vermiyor:"+"192.168.43."+str(ip))
         time.sleep(60)
         return  main()
-
 
 main()
